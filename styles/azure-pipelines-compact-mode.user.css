@@ -1,0 +1,154 @@
+/* ==UserStyle==
+@name           Azure Pipelines Compact Mode
+@namespace      github.com/BLiu1/userstyles
+@version        1.1.0
+@description    Make better use of your screen real estate in Azure DevOps Pipelines. Based on Azure DevOps Compact Mode by Logan Bussell (https://userstyles.world/style/24826/azure-devops-compact-mode).
+@author         Brian Liu
+@homepageURL    https://github.com/BLiu1/userstyles
+@supportURL     https://github.com/BLiu1/userstyles/issues
+@license        MIT
+
+@var            range normal-panel-width    "Panel width, small to x-large screens" [380, 200, 600, 10, "px"]
+@var            range xx-large-panel-width  "Panel width, xx-large screens"         [400, 200, 600, 10, "px"]
+@var            range xxx-large-panel-width "Panel width, xxx-large screens"        [500, 200, 600, 10, "px"]
+@var            range run-tree-cell-height  "Panel row height"                      [32, 26, 40, 1, "px"]
+==/UserStyle== */
+
+@-moz-document regexp("^https://dev\\.azure\\.com/[^?#]*/_build.*"), regexp("^https://.*\\.visualstudio\\.com/[^?#]*/_build.*") {
+    /* Pipelines */
+
+    /* Longer, compact breadcrumbs */
+    .bolt-breadcrumb-item-text {
+        padding: 4px 6px;
+        max-width: 350px;
+        transition: max-width .2s ease-in;
+    }
+    .bolt-breadcrumb-divider {
+        padding: 0px 2px;
+    }
+    @media screen and (min-width: 1366px) {
+        .bolt-breadcrumb-item-text {
+            max-width: 600px;
+        }
+    }
+
+    /* Build Results Logs (_build/results?...&view=logs) */
+
+    /* Wider side panel */
+    @media screen and (max-width: 1365px) {
+        .bolt-master-panel:not(.xs-master-panel-full) {
+            /* original: 280px; */
+            width: var(--normal-panel-width, 380px);
+        }
+    }
+    @media screen and (min-width: 1366px) and (max-width: 1919px) {
+        .bolt-master-panel:not(.xs-master-panel-full) {
+            /* original: 320px; */
+            width: var(--xx-large-panel-width, 400px);
+        }
+    }
+    @media screen and (min-width: 1920px) {
+        .bolt-master-panel:not(.xs-master-panel-full)    {
+            /* original: 384px; */
+            width: var(--xxx-large-panel-width, 500px);
+        }
+    }
+
+    /* Shrink spacing in side panel */
+    .bolt-table-header-cell-content {
+        /* original: 7px 0 */
+        margin: 10px 0 4px 0;
+        /* original: .375rem .6875rem (6px 11px) */
+        padding: .125rem .4375rem; /* (2px 7px) */
+    }
+    .bolt-tree-cell .bolt-table-cell-content {
+        /* original: 6px for all three */
+        padding-bottom: 0;
+        padding-left: 2px;
+        padding-top: 0;
+    }
+    .bolt-table-cell-content {
+        /* original: .5625rem .75rem (9px 12px) */
+        padding: .375rem .5rem; /* (6px 8px) */
+    }
+    .run-logs-tree .run-tree-cell {
+        height: var(--run-tree-cell-height, 32px);
+    }
+    .run-tree-cell .icon-large-margin {
+        /* original: 12px */
+        margin-right: 4px;
+    }
+    .run-logs-tree .is-job {
+        /* original: 10px */
+        margin-left: 0;
+    }
+
+    /* Align job durations (why is .flex-self-end on them?) */
+    .run-logs-tree .job-duration {
+        align-self: center;
+    }
+
+    /* Header e.g. "Jobs run in #123456..." */
+    .bolt-master-panel-header {
+        padding-top: 4px;
+        padding-bottom: 4px;
+    }
+    .bolt-master-panel-standard-header {
+        padding-left: 8px;
+        padding-top: 8px;
+        padding-right: 8px;
+    }
+    .bolt-button.bolt-header-back-button {
+        margin-right: 2px;
+    }
+    /* Unwrap header (unsure whether to keep or not) */
+    .bolt-master-panel-header-title, .bolt-master-panel-subtitle {
+        white-space: normal;
+    }
+
+    /* Job title in pipeline output */
+    .run-logs-view .log-header {
+        padding-left: 8px;
+        padding-top: 8px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+    }
+    .reader-actions,
+    .find-area {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    /* Build Results (_build/results?...&view=results) */
+
+    /* Realign stages and resources card */
+    .stages-table .bolt-tree-cell .bolt-table-cell-content {
+        padding-bottom: 4px;
+        padding-left: 2px;
+        padding-top: 4px;
+    }
+    .resources-card-content.padding-top-16 {
+        padding-top: 12px;
+    }
+    .resources-card .resources-card-tab-bar {
+        padding-left: 8px;
+        padding-bottom: 8px;
+    }
+    .resources-card .resources-card-table-cell {
+        padding: 8px 7px;
+    }
+
+    .icon-large-margin {
+        margin-right: 8px;
+    }
+
+    /* Pipelines Folder View (_build?definitionScope=) */
+
+    /* Realign card header */
+    .bolt-table-card .bolt-card-header {
+        padding-left: 16px;
+        padding-top: 12px;
+        padding-right: 12px;
+    }
+
+}
